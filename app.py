@@ -43,7 +43,7 @@ if 'chat_history' not in st.session_state:
     st.session_state.chat_history = [
         {
             "role": "system",
-            "content": "You are a helpful assistant that provides advice on the current recipe ingredients."
+            "content": "You are a helpful assistant that provides insights."
         }
     ]
 
@@ -53,24 +53,18 @@ if 'show_add_form' not in st.session_state:
 # --------------------------
 # Page Title & Layout
 # --------------------------
-st.title("Recipe Creator with Chatbot")
+st.title("Spare Parts Inventory Assistant")
 
 if st.session_state.get("show_add_form", True):
     with st.expander("What is this?", expanded=False):
         st.write(
-            "This is a small PoC built in one day for a recipe assistant using a state-of-the-art reasoning model (o3-mini) with information retrieval tools."
+            "This is a quick PoC built for a spare parts inventory assistant using a state-of-the-art reasoning model (e.g., GPT-4) combined with file-based data retrieval."
         )
         st.write("**What is this data?**")
-        st.write("- All the data in this PoC is simulated from a bakery and is invented for the purpose of this demo.")
-        st.write("**What tools are being used here?**")
-        st.write("- We are using the latest o3-mini from OpenAI with a file search tool (OpenAI responses API). This is great for this use case because this small reasoning model can quantify ingredients in a considerable amount of time.")
-        st.write("**What is capable of ?**")
-        st.write("- This assistant can suggest (add, edit or delete) ingredients from the database depending on the chef's needs. It has creativity and is precise with quantities. You can ask it to suggest something vegan, 'fun', or 'trendy' and it will know what you mean :)")
+        st.write("- The uploaded Excel file contains real or simulated data about inventory levels, stock parameters, open purchase orders, and material reservations.")
+        st.write("**What tools are being used?**")
+        st.write("- This assistant leverages an OpenAI language model with file search and analysis capabilities for Excel documents.")
+        st.write("**What is it capable of?**")
+        st.write("- It can answer questions about current stock status, detect shortages or overstock, and suggest actions like creating purchase orders, initiating internal transfers, or suspending existing orders based on predefined logic.")
 
-left_col, right_col = st.columns([2, 2])
-
-with left_col:
-    render_recipe_page()
-    
-with right_col:
-    render_chatbot_page()
+render_chatbot_page()
